@@ -63,7 +63,7 @@ By default, the application will be available at `https://googleplacesapiscraper
 You can make a POST request to the `/api/fetch_places` endpoint with the required parameters. For example, you can use Postman or curl:
 
 ```bash
-    curl -X POST https://googleplacesapiscraper-production.up.railway.app/api/fetch_places/api/fetch_places \
+    curl -X POST https://googleplacesapiscraper-production.up.railway.app/api/fetch_places/ \
     -H "Content-Type: application/json" \
     -d '{
         "lat_and_long": "latitude,longitude",
