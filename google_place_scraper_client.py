@@ -10,7 +10,7 @@ PRIVATE_API_URL = os.getenv("API_URL")
 
 # Set parameters for the private API request
 params = {
-    "lat_and_long": os.getenv("LAT_AND_LONG="),
+    "lat_and_long": os.getenv("LAT_AND_LONG"),
     "radius": os.getenv("RADIUS"),
     "location": os.getenv("LOCATION"),
     "place_type": os.getenv("PLACE_TYPE"),

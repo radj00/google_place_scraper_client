@@ -56,14 +56,14 @@ To start the Flask application, run:
     python app.py
 ```
 
-By default, the application will be available at http://127.0.0.1:5000/api/fetch_places.
+By default, the application will be available at `https://googleplacesapiscraper-production.up.railway.app/api/fetch_places`.
 
 ### Making Requests
 
 You can make a POST request to the `/api/fetch_places` endpoint with the required parameters. For example, you can use Postman or curl:
 
 ```bash
-    curl -X POST http://127.0.0.1:5000/api/fetch_places \
+    curl -X POST https://googleplacesapiscraper-production.up.railway.app/api/fetch_places/api/fetch_places \
     -H "Content-Type: application/json" \
     -d '{
         "lat_and_long": "latitude,longitude",
