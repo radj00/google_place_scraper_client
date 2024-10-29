@@ -12,14 +12,8 @@ Welcome to the Google Place Scraper Client! This project provides a simple inter
 
 ### Prerequisites
 
-- Flask==2.2.2
-- requests==2.28.1
-- pandas==1.5.3
-- openpyxl==3.0.10
-- beautifulsoup4==4.12.2
-- lxml==4.9.2
-- python-dotenv==1.0.0
-- Werkzeug==2.2.2
+- requests>=2.25.1
+- python-dotenv>=0.19.0
 - Other dependencies as listed in `requirements.txt`
 
 ### Installation
@@ -53,7 +47,7 @@ Welcome to the Google Place Scraper Client! This project provides a simple inter
 To start the Flask application, run:
 
 ```bash
-    python app.py
+    python google_place_scraper_client.py
 ```
 
 By default, the application will be available at `https://googleplacesapiscraper-production.up.railway.app/api/fetch_places`.
