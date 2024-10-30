@@ -29,7 +29,8 @@ def truncate_text(text, max_length):
 
 # Make the request to your private API
 try:
-    response = requests.post(PRIVATE_API_URL, json=params)
+    # Change to GET request and pass parameters as URL params
+    response = requests.get(PRIVATE_API_URL, params=params)
     response.raise_for_status()
     data = response.json()
 
