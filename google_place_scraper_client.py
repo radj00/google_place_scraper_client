@@ -29,10 +29,11 @@ def truncate_text(text, max_length):
 
 # Make the request to your private API
 try:
-    # Change to GET request and pass parameters as URL params
-    response = requests.get(PRIVATE_API_URL, params=params)
-    response.raise_for_status()
-    data = response.json()
+    # Adjust the HTTP method as needed (GET or POST)
+    response = requests.post(PRIVATE_API_URL, json=params)
+    response.raise_for_status()  # Raise an error for bad responses
+    data = response.json()  # Parse the response JSON
+    print("Data retrieved:", data)
 
     # Define filename with timestamp, place_type/keyword, and location
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
