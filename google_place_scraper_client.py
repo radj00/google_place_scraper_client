@@ -5,10 +5,15 @@ from datetime import datetime
 import pandas as pd
 
 # Load environment variables from .env file
-load_dotenv()
+load_dotenv()  # Ensure this line is present
 
-# API URL for accessing the private repository's endpoint
-PRIVATE_API_URL = os.getenv("API_URL")
+# Directly use the environment variable for the API URL
+PRIVATE_API_URL = os.getenv("API_URL")  # Use getenv to avoid KeyError
+
+# Check if the API_URL was loaded successfully
+if PRIVATE_API_URL is None:
+    print("Error: API_URL environment variable is not set.")
+    exit(1)  # Exit the script if API_URL is not set
 
 # Set parameters for the private API request
 params = {
@@ -23,7 +28,7 @@ params = {
 # Define a maximum filename length
 MAX_FILENAME_LENGTH = 50
 
-# Truncate the components if needed to ensure the final filename length is within the limit
+# Function to truncate text for filename
 def truncate_text(text, max_length):
     return text[:max_length] if len(text) > max_length else text
 
@@ -38,7 +43,7 @@ try:
     if "results" not in data:
         raise ValueError("No results found in the API response.")
 
-    # Define filename with timestamp, place_type/keyword, and location
+    # Filename setup
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     place_type = truncate_text(params.get("place_type", "unknown"), 15)
     keyword = truncate_text(params.get("keyword", "unknown"), 15)
@@ -55,7 +60,11 @@ try:
     df.to_csv(filename, index=False)
     print(f"Data saved to {filename}")
 
-except requests.exceptions.RequestException as e:
-    print("Failed to retrieve data:", e)
+except KeyError as ke:
+    print(f"Missing environment variable: {ke}")
+except requests.exceptions.HTTPError as http_err:
+    print(f"HTTP error occurred: {http_err} - {response.text}")
 except ValueError as ve:
     print(ve)
+except Exception as e:
+    print("Failed to retrieve data:", e)
