@@ -29,11 +29,14 @@ def truncate_text(text, max_length):
 
 # Make the request to your private API
 try:
-    # Adjust the HTTP method as needed (GET or POST)
     response = requests.post(PRIVATE_API_URL, json=params)
     response.raise_for_status()  # Raise an error for bad responses
     data = response.json()  # Parse the response JSON
     print("Data retrieved:", data)
+
+    # Check if 'results' exists in the data
+    if "results" not in data:
+        raise ValueError("No results found in the API response.")
 
     # Define filename with timestamp, place_type/keyword, and location
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -54,3 +57,5 @@ try:
 
 except requests.exceptions.RequestException as e:
     print("Failed to retrieve data:", e)
+except ValueError as ve:
+    print(ve)
