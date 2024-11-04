@@ -25,13 +25,6 @@ params = {
     "api_key": os.getenv("API_KEY")
 }
 
-# Define a maximum filename length
-MAX_FILENAME_LENGTH = 50
-
-# Function to truncate text for filename
-def truncate_text(text, max_length):
-    return text[:max_length] if len(text) > max_length else text
-
 # Make the request to your private API
 try:
     response = requests.post(PRIVATE_API_URL, json=params)
@@ -39,20 +32,9 @@ try:
     data = response.json()  # Parse the response JSON
     print("Data retrieved:", data)
 
-    # Check if 'results' exists in the data
-    if "results" not in data:
-        raise ValueError("No results found in the API response.")
-
     # Filename setup
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    place_type = truncate_text(params.get("place_type", "unknown"), 15)
-    keyword = truncate_text(params.get("keyword", "unknown"), 15)
-    location = truncate_text(params.get("location", "unknown").replace(" ", "_"), 20)
-    filename = f"data/{timestamp}_{place_type}_{keyword}_{location}.csv"
-
-    # Ensure the filename does not exceed the maximum allowed length
-    if len(filename) > MAX_FILENAME_LENGTH:
-        filename = filename[:MAX_FILENAME_LENGTH] + ".csv"
+    filename = f"data/{timestamp}_places.csv"
 
     # Convert to DataFrame and save to CSV
     df = pd.DataFrame(data.get("results", []))
